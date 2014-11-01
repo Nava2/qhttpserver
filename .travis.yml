@@ -19,12 +19,6 @@ script:
   - make -j2 all
   - make install
 
-notifications:
-  recipients:
-    - kevin.brightwell2@gmail.com
-  email:
-    on_success: change
-    on_failure: always
 os:
   - linux
   - osx
