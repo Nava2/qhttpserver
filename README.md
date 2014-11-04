@@ -31,7 +31,7 @@ or using CMake
 By default, the installation prefix is /usr/local. To change that to /usr,
 for example, run:
 
-    qmake -r PREFIX=/usr
+    cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr .. && make && make install
 
 Usage
 -----
