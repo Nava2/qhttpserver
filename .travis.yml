@@ -1,7 +1,8 @@
+langauge: c++
+
 compiler:
   - clang
   - gcc
-
 
 install:
   - sudo add-apt-repository --yes ppa:beineri/opt-qt532 
