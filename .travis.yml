@@ -12,11 +12,11 @@ install:
   - source /opt/qt53/bin/qt53-env.sh
   - cmake --version
   - qmake -v
-  - gcc -v
+  - $CXX -v
 
 script:
   - mkdir build/ && cd build/
-  - cmake -DCMAKE_INSTALL_PREFIX:PATH=~/local/ ..
+  - cmake ..
   - make -j2 all
   - make install
 
