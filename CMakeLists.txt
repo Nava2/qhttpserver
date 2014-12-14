@@ -1,5 +1,5 @@
 
-project(qhttpserver)
+project(QHttpServer)
 
 cmake_minimum_required(VERSION 2.8.11)
 
@@ -102,17 +102,16 @@ endif()
 
 include_directories(${INCLUDE_OUTPUT_DIR})
 
-add_library(qhttpserver SHARED
+add_library(QHttpServer SHARED
     ${qhttpserver_SRCS}
     ${qhttpserver_PUBLIC_HEADER}
-    ${http-parser_SRCS}
-)
+    ${http-parser_SRCS})
 
-add_dependencies(qhttpserver
+add_dependencies(QHttpServer
     qhttpserver_headers
 )
 
-target_link_libraries(qhttpserver
+target_link_libraries(QHttpServer
         #installed libs:
         Qt5::Network 
         Qt5::Core
@@ -133,7 +132,7 @@ endforeach()
 
 # INSTALL components:
 
-install(TARGETS qhttpserver
+install(TARGETS QHttpServer
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib/static)
