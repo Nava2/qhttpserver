@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION 2.8.11)
 
 SET(QHTTPSERVER_MAIN true)
 
-SET(QHttpServer_LIB_NAME "QHttpServer")
-SET(QHttpServer_LIB_VERSION "0.0.1")
+SET(qhttpserver_LIB_NAME "QHttpServer")
+SET(qhttpserver_LIB_VERSION "0.0.1")
 
 
 IF (NOT CMAKE_BUILD_TYPE)
@@ -28,7 +28,7 @@ ELSEIF(UNIX)
         SET( CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
         SET(BUILD_CHAIN "gcc")
     endif()
-       
+
     IF(APPLE)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
         message(STATUS "Apple Machine detected, Using libc++")
@@ -56,22 +56,22 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQHTTPSERVER_EXPORT")
 
 # HTTP Parser:
 include_directories("http-parser/")
-SET( http-parser_SRCS 
+SET( http-parser_SRCS
     http-parser/http_parser.c
     )
 
-SET(QHttpServer_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+SET(qhttpserver_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 
-# QHttpServer:
+# qhttpserver:
 
-SET( QHttpServer_SRCS 
-    src/qhttpconnection.cpp 
+SET( qhttpserver_SRCS
+    src/qhttpconnection.cpp
     src/qhttpresponse.cpp
-    src/qhttprequest.cpp    
+    src/qhttprequest.cpp
     src/qhttpserver.cpp
 )
 
-SET( QHttpServer_PUBLIC_HEADER
+SET( qhttpserver_PUBLIC_HEADER
     src/qhttpserver.h
     src/qhttprequest.h
     src/qhttpresponse.h
@@ -79,25 +79,25 @@ SET( QHttpServer_PUBLIC_HEADER
     src/qhttpserverfwd.h
 )
 
-SET( QHttpServer_SHARE_CONFIGS
+SET( qhttpserver_SHARE_CONFIGS
     share/libqhttpserver.pc
     share/QHttpServerConfig.cmake
 )
 
-add_custom_target(QHttpServer_headers)
+add_custom_target(qhttpserver_headers)
 INCLUDE_DIRECTORIES(${INCLUDE_OUTPUT_DIR})
 
 IF("${CMAKE_BUILD_TYPE}" STREQUAL "RELEASE")
     MESSAGE(STATUS "Copying Headers for release")
 
-    foreach(header ${QHttpServer_PUBLIC_HEADER})
+    foreach(header ${qhttpserver_PUBLIC_HEADER})
         add_custom_command(
-            TARGET QHttpServer_headers
+            TARGET qhttpserver_headers
             COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/${header} ${INCLUDE_OUTPUT_DIR}/${header}
             MAIN_DEPENDENCY ${header})
     endforeach()
 else()
-    INCLUDE_DIRECTORIES( ${QHttpServer_SRC_DIR})
+    INCLUDE_DIRECTORIES( ${qhttpserver_SRC_DIR})
 endif()
 
 include_directories(${INCLUDE_OUTPUT_DIR})
@@ -108,23 +108,20 @@ add_library(QHttpServer SHARED
     ${http-parser_SRCS})
 
 add_dependencies(QHttpServer
-    QHttpServer_headers
-    ${QHttpServer_SRCS}
-    ${QHttpServer_PUBLIC_HEADER}
-    ${http-parser_SRCS}
+    qhttpserver_headers
 )
 
 target_link_libraries(QHttpServer
         #installed libs:
-        Qt5::Network 
+        Qt5::Network
         Qt5::Core
     )
 
 # configure:
 SET(BINARY_SHARE_PATH "${CMAKE_CURRENT_BINARY_DIR}/share")
-SET(INSTALL_SHARE_PATH "share/${QHttpServer_LIB_NAME}")
+SET(INSTALL_SHARE_PATH "share/${qhttpserver_LIB_NAME}")
 
-foreach(file ${QHttpServer_SHARE_CONFIGS})
+foreach(file ${qhttpserver_SHARE_CONFIGS})
     get_filename_component(file_NAME ${file} NAME)
 
     set(OUTPATH "${BINARY_SHARE_PATH}/${file_NAME}")
@@ -141,6 +138,6 @@ install(TARGETS QHttpServer
         ARCHIVE DESTINATION lib/static)
 
 install(DIRECTORY src/
-        DESTINATION "include/${QHttpServer_LIB_NAME}"
+        DESTINATION "include/${qhttpserver_LIB_NAME}"
         FILES_MATCHING PATTERN "*.h" )
 
