@@ -1,7 +1,8 @@
+language: cpp
+
 compiler:
   - clang
   - gcc
-
 
 install:
   - sudo add-apt-repository --yes ppa:beineri/opt-qt532 
@@ -11,13 +12,12 @@ install:
   - source /opt/qt53/bin/qt53-env.sh
   - cmake --version
   - qmake -v
-  - gcc -v
 
 script:
   - mkdir build/ && cd build/
-  - cmake -DCMAKE_INSTALL_PREFIX:PATH=~/local/ ..
+  - cmake -DCMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH:/usr/local" ..
   - make -j2 all
-  - make install
+  - sudo make install
 
 os:
   - linux

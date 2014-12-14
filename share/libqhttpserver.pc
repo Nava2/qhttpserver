@@ -3,8 +3,8 @@ exec_prefix=${prefix}
 includedir=${prefix}/include
 libdir=${exec_prefix}/lib
 
-Name: @qhttpserver_LIB_NAME@
+Name: @QHttpServer_LIB_NAME@
 Description: Drop in http server for web applications
 Version: 0.0.1
-Cflags: -I${includedir}/@qhttpserver_LIB_NAME@
-Libs: -L${libdir} -@qhttpserver_LIB_NAME@
+Cflags: -I${includedir}/@QHttpServer_LIB_NAME@
+Libs: -L${libdir} -@QHttpServer_LIB_NAME@

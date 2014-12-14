@@ -15,25 +15,32 @@ Installation
 
 Requires Qt 4 or Qt 5.
 
-    qmake && make && su -c 'make install'
+    mkdir build/
+    cd build/
+    cmake .. 
+    make && make install
 
 To link to your projects put this in your project's qmake project file
 
     LIBS += -lqhttpserver
+    
+or using CMake
+    
+    find_package(QHttpServer REQUIRED)
 
 By default, the installation prefix is /usr/local. To change that to /usr,
 for example, run:
 
-    qmake -r PREFIX=/usr
+    cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr .. && make && make install
 
 Usage
 -----
 
 Include the headers
 
-    #include <qhttpserver.h>
-    #include <qhttprequest.h>
-    #include <qhttpresponse.h>
+    #include <QHttpServer/qhttpserver.h>
+    #include <QHttpServer/qhttprequest.h>
+    #include <QHttpServer/qhttpresponse.h>
 
 Create a server, and connect to the signal for new requests
 
