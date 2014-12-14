@@ -29,3 +29,4 @@ find_package_handle_standard_args(QHttpServer  DEFAULT_MSG
                                   QHTTPSERVER_LIBRARY QHTTPSERVER_INCLUDE_DIR)
 
 mark_as_advanced(QHTTPSERVER_INCLUDE_DIR QHTTPSERVER_LIBRARY )
+

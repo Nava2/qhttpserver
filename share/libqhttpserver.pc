@@ -8,3 +8,4 @@ Description: Drop in http server for web applications
 Version: 0.0.1
 Cflags: -I${includedir}/@QHttpServer_LIB_NAME@
 Libs: -L${libdir} -@QHttpServer_LIB_NAME@
+
